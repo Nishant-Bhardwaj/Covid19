@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="covid/.mvn/wrapper"/>
+	<classpathentry kind="src" path="covid/src/main/java"/>
+	<classpathentry kind="src" path="covid/src/test/java"/>
+	<classpathentry kind="lib" path="covid/target/covid-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="covid/target/classes"/>
+</classpath>

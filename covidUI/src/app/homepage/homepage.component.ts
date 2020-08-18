@@ -9,6 +9,7 @@ import { HomepageService} from './../homepage/homepage.service';
 export class HomepageComponent implements OnInit {
 
   record
+  state
 
   constructor(
     private homepageService: HomepageService

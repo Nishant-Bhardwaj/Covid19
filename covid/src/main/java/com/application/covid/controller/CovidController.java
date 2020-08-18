@@ -6,10 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,9 +22,12 @@ public class CovidController {
 	@Autowired
 	District district;
 
-	@RequestMapping("home")
-	public String home(){
-		return "Welcome";
+	@RequestMapping(value = {"home/{user}", "/home"})
+	public String home(@PathVariable(value="user",required = false) String userName){
+		if(userName==null){
+			userName="guest";
+		}
+		return "Welcome "+userName;
 	}
 
 	@GetMapping("/district")
@@ -56,8 +56,6 @@ public class CovidController {
 					int confirmedCase = Integer.parseInt(root.get(state).get("districtData").get(distName).get("confirmed").toString());
 					int deceasedCase = Integer.parseInt(root.get(state).get("districtData").get(distName).get("deceased").toString());
 					int recoveredCase = Integer.parseInt(root.get(state).get("districtData").get(distName).get("recovered").toString());
-
-//					System.out.println(distName+" : "+root.get(state).get("districtData").get(distName).toString()+"\n");
 
 					dist.setState(state);
 					dist.setDist(distName);

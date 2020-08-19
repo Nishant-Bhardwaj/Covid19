@@ -1,10 +1,12 @@
 package com.application.covid.controller;
 
+import com.application.covid.Configurations.GreatingConfiguration;
 import com.application.covid.Modles.District;
 import com.application.covid.servies.CovidServices;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +24,15 @@ public class CovidController {
 	@Autowired
 	District district;
 
+	@Autowired
+	GreatingConfiguration greatingConfiguration;
+
 	@RequestMapping(value = {"home/{user}", "/home"})
 	public String home(@PathVariable(value="user",required = false) String userName){
 		if(userName==null){
 			userName="guest";
 		}
-		return "Welcome "+userName;
+		return greatingConfiguration.getGreat()+userName;
 	}
 
 	@GetMapping("/district")

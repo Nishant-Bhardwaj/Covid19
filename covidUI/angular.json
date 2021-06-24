@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "covidUI"
+    }
+  },
+  "defaultProject": "covidUI",
+  "cli": {
+    "analytics": false
+  }
 }

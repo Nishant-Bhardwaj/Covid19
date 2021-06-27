@@ -11,6 +11,7 @@ export class VaccineService {
   ) { }
 
   callVaccineBooking(){
-    console.log(this.http.get("http://localhost:9999/order/3/meerut/"));
+    console.log("Service to backend")
+    return this.http.get("http://localhost:9999/order/3/meerut/");
   }
 }

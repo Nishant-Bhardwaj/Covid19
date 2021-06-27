@@ -8,7 +8,7 @@ import {VaccineService} from './vaccine.service';
 })
 export class VaccineComponent implements OnInit {
 
-  result: any;
+  result
 
   constructor(
     private vaccineService : VaccineService
@@ -19,6 +19,13 @@ export class VaccineComponent implements OnInit {
   }
 
   callVaccineApp() {
+    console.log("Called Vaccince App")
+    this.vaccineService.callVaccineBooking().subscribe(data=>{
+      console.log("data "+data);
+      this.result = data;
+    });
+
+    console.log("Result: " + this.result);
 
   }
 

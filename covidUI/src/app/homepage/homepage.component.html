@@ -14,6 +14,13 @@
   </tr>
   </thead>
   <tbody>
+  <tr style="background-color: rgb(243, 217, 217);">
+    <td style="font-weight: bold;" colspan="2">Total Count: </td>
+    <td style="color:red; font-weight: bold;">{{totalCases}}</td>
+    <td style="color:blue; font-weight: bold;">{{totalActive}}</td>
+    <td style="color:green; font-weight: bold;">{{totalRecovered}}</td>
+    <td style="color:grey; font-weight: bold;">{{totalDeceased}}</td>
+  </tr>
   <tr *ngFor="let data of record">
     <td>{{data.state}}</td>
     <td>{{data.dist}}</td>

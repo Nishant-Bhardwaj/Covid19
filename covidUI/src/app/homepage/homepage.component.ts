@@ -10,6 +10,10 @@ export class HomepageComponent implements OnInit {
 
   record
   state
+  totalActive=0
+  totalCases=0
+  totalRecovered=0
+  totalDeceased=0
 
   constructor(
     private homepageService: HomepageService
@@ -23,7 +27,20 @@ export class HomepageComponent implements OnInit {
     this.homepageService.getDataService().subscribe(data=>{
       console.log(data);
       this.record = data;
+      this.calculateTotal();
     });
+  }
+
+  calculateTotal(){
+    console.log("Size: " + this.record.length)
+      for(let states=0 ; states <=this.record.length; states++){
+        if(this.record[states] != null){
+          this.totalCases += this.record[states].confirmedCase
+          this.totalActive += this.record[states].activeCase
+          this.totalRecovered += this.record[states].recoveredCase
+          this.totalDeceased += this.record[states].deceasedCase
+        }
+      }
   }
 
 }

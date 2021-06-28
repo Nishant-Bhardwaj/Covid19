@@ -14,6 +14,6 @@ export class VaccineService {
   callVaccineBooking(){
     console.log("Service to backend")
     return this.http.get<String>("http://localhost:9999/order/10/meerut/", {responseType:'text' as 'json'});
-
   }
+  
 }

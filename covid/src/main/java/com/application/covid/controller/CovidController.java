@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,29 +52,24 @@ public class CovidController {
 			Iterator<String> itr = root.fieldNames();
 			while (itr.hasNext()){
 
+				District dist = new District();
+
 				String state = itr.next();
 //				System.out.println(state+" : "+root.get(state).toString()+"\n");
 
-				Iterator<String> distItr = root.get(state).get("districtData").fieldNames();
+				int confirmedCase = Integer.parseInt(root.get(state).get("total").get("confirmed").toString());
+				int deceasedCase = Integer.parseInt(root.get(state).get("total").get("deceased").toString());
+				int recoveredCase = Integer.parseInt(root.get(state).get("total").get("recovered").toString());
+				int activeCase = confirmedCase - (deceasedCase + recoveredCase);
 
-				while (distItr.hasNext()){
-					District dist = new District();
-					String distName = distItr.next();
+				dist.setState(state);
+				dist.setDist("Complete State");
+				dist.setActiveCase(activeCase);
+				dist.setConfirmedCase(confirmedCase);
+				dist.setDeceasedCase(deceasedCase);
+				dist.setRecoveredCase(recoveredCase);
 
-					int activeCase = Integer.parseInt(root.get(state).get("districtData").get(distName).get("active").toString());
-					int confirmedCase = Integer.parseInt(root.get(state).get("districtData").get(distName).get("confirmed").toString());
-					int deceasedCase = Integer.parseInt(root.get(state).get("districtData").get(distName).get("deceased").toString());
-					int recoveredCase = Integer.parseInt(root.get(state).get("districtData").get(distName).get("recovered").toString());
-
-					dist.setState(state);
-					dist.setDist(distName);
-					dist.setActiveCase(activeCase);
-					dist.setConfirmedCase(confirmedCase);
-					dist.setDeceasedCase(deceasedCase);
-					dist.setRecoveredCase(recoveredCase);
-
-					distInfoList.add(dist);
-				}
+				distInfoList.add(dist);
 			}
 
 		}catch (Exception e){
